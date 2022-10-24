@@ -1,0 +1,81 @@
+{% extends 'ratao/base.html' %}
+
+{% block content %}
+
+
+
+    <div class="table-responsive{-sm|-md|-lg|-xl|-xxl} h-75 w-50">
+
+        <table class="table table-sm  table-bordered ">
+            <thead class="col-lg-4 text-sm-center table-success ">
+            <tr class="w-50">
+                <td>ID</td>
+                <td>CODIGO</td>
+                <td>NOME</td>
+                <td>DESCRIÇÃO</td>
+                <td>TOMBAMENTO</td>
+                <td>UN</td>
+                <td>QUANTIDADE</td>
+                <td>ESTADO</td>
+                <td>COD_LOCAL</td>
+                <td>LOCAL</td>
+                <td>VALOR_UN</td>
+                <td>VALOR_TOTAL</td>
+                <td>FOTO</td>
+                <td>FORNECEDOR</td>
+                <td>NOTA_FISCAL</td>
+                <td>DATA_NF</td>
+                <td>NOTA_EMPENHO</td>
+                <td>DATA_NE</td>
+                <td>DATA_RECEBIMENTO</td>
+                <td>PROCESSO</td>
+                <td>TIPO_ENTRADA</td>
+                <td>RESPONSÁVEL</td>
+                <td>DATA_MANUTENÇÃO</td>
+                <td>ID_LOCAL</td>
+                <td>ID_FORNCEDOR</td>
+                <td>ID_MARCA</td>
+                <td>ID_CLASSIFICAÇÃO</td>
+                <td>ID_NOTA</td>
+                <td>ID_PROCESSO</td>
+            </tr>
+            </thead>
+            <tbody>
+            {% for material in m %}
+            <tr>
+                <td>{{ material.item }}</td>
+                <td>{{ material.codigo }}</td>
+                <td>{{ material.nome }}</td>
+                <td>{{ material.descricao }}</td>
+                <td>{{ material.tombamento }}</td>
+                <td>{{ material.uni }}</td>
+                <td>{{ material.quant }}</td>
+                <td>{{ material.estado }}</td>
+                <td>{{ material.codlocal }}</td>
+                <td>{{ material.local }}</td>
+                <td>{{ material.valor_unitario }}</td>
+                <td>{{ material.valor_total }}L</td>
+                <td><img src="{{ material.foto }}" alt=""></td>
+                <td>{{ material.forn }}</td>
+                <td>{{ material.nf }}</td>
+                <td>{{ material.data_nf }}</td>
+                <td>{{ material.ne }}</td>
+                <td>{{ material.data_ne }}</td>
+                <td>{{ material.datareceb }}</td>
+                <td>{{ material.processo }}</td>
+                <td>{{ material.tipoentrada }}</td>
+                <td>{{ material.responsavel }}L</td>
+                <td>{{ material.data_manute }}</td>
+                <td>{{ material.id_local }}</td>
+                <td>{{ material.id_fornecedor }}</td>
+                <td>{{ material.id_marca }}</td>
+                <td>I{{ material.id_classifica }}</td>
+                <td>{{ material.id_nota }}</td>
+                <td>{{ material.id_processo }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock content %}
