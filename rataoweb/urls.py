@@ -15,16 +15,30 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from django.views.static import serve
 
-from rataoapp.views import mostrar_materiais, novo_material
+from rataoapp.views import materiais, novo_material, home, editar_material, editar_local,novo_local,locais,nova_marca,marcas,editar_marca
+from rataoapp.views import classes,nova_classe, editar_classe
 from rataoweb import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('mostrar_materiais/',mostrar_materiais, name='mostrar_materiais'),
-    path('novo_material/',novo_material, name='novo_material'),
-    path(r'^img/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
-   ]
-urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+    path('materiais/', materiais, name='materiais'),
+    path('novo_material/', novo_material, name='novo_material'),
+    path('home/', home, name='home'),
+    path('home/', home, name='home'),
+    path('novo_local/', novo_local, name='novo_local'),
+    path('nova_classe/', nova_classe, name='nova_classe'),
+    path('locais/', locais, name='locais'),
+    path('marcas/', marcas, name='marcas'),
+    path('classes/', classes, name='classes'),
+    path('nova_marca/', nova_marca, name='nova_marca'),
+    path('editar_local/<int:codigo>', editar_local,name='editar_local'),
+    path('editar_material/<int:item>', editar_material,name='editar_material'),
+    path('editar_marca/<int:codigo>', editar_marca,name='editar_marca'),
+    path('editar_classe/<int:codigo>', editar_classe,name='editar_classe'),
+
+    re_path(r'^img/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

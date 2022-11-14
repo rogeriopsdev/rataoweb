@@ -6,6 +6,7 @@
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
+from PIL import Image
 
 
 class Acervo(models.Model):
@@ -111,6 +112,8 @@ class Classificacao(models.Model):
     class Meta:
         managed = False
         db_table = 'classificacao'
+    def __str__(self):
+        return self.nome
 
 
 class DjangoAdminLog(models.Model):
@@ -170,17 +173,23 @@ class Fornecedor(models.Model):
         managed = False
         db_table = 'fornecedor'
 
+    def __str__(self):
+        return self.nome
+
 
 class Local(models.Model):
     codigo = models.AutoField(primary_key=True)
     setor = models.CharField(max_length=255, blank=True, null=True)
     referencia = models.CharField(max_length=200, blank=True, null=True)
-    foto = models.CharField(max_length=100, blank=True, null=True)
+    foto = models.ImageField(blank=True, null=True)
     responsavel = models.CharField(max_length=100, blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'local'
+
+    def __str__(self):
+        return self.setor
 
 
 class Marca(models.Model):
@@ -190,6 +199,9 @@ class Marca(models.Model):
     class Meta:
         managed = False
         db_table = 'marca'
+
+    def __str__(self):
+        return self.nome
 
 
 class Material(models.Model):
@@ -201,16 +213,10 @@ class Material(models.Model):
     uni = models.CharField(db_column='UNI', max_length=5, blank=True, null=True)  # Field name made lowercase.
     quant = models.FloatField(db_column='QUANT', blank=True, null=True)  # Field name made lowercase.
     estado = models.CharField(db_column='ESTADO', max_length=14, blank=True, null=True)  # Field name made lowercase.
-    codlocal = models.IntegerField(blank=True, null=True)
     local = models.CharField(db_column='LOCAL', max_length=255, blank=True, null=True)  # Field name made lowercase.
     valor_unitario = models.FloatField(db_column='VALOR_UNITARIO', blank=True, null=True)  # Field name made lowercase.
     valor_total = models.FloatField(db_column='VALOR_TOTAL', blank=True, null=True)  # Field name made lowercase.
-    foto = models.CharField(max_length=70, blank=True, null=True)
-    forn = models.CharField(max_length=100, blank=True, null=True)
-    nf = models.CharField(max_length=20, blank=True, null=True)
-    data_nf = models.CharField(max_length=14, blank=True, null=True)
-    ne = models.CharField(max_length=14, blank=True, null=True)
-    data_ne = models.CharField(max_length=14, blank=True, null=True)
+    foto = models.ImageField(null=True, blank=True)
     datareceb = models.CharField(max_length=12, blank=True, null=True)
     processo = models.CharField(max_length=25, blank=True, null=True)
     tipoentrada = models.CharField(max_length=23, blank=True, null=True)
@@ -222,10 +228,15 @@ class Material(models.Model):
     id_classifica = models.ForeignKey(Classificacao, models.DO_NOTHING, db_column='id_classifica', blank=True, null=True)
     id_nota = models.ForeignKey('Notafiscal', models.DO_NOTHING, db_column='id_nota', blank=True, null=True)
     id_processo = models.ForeignKey('Processo', models.DO_NOTHING, db_column='id_processo', blank=True, null=True)
+    id_ne = models.ForeignKey('Empenho', models.DO_NOTHING, db_column='id_ne', blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'material'
+
+    def __str__(self):
+        return self.nome
+
 
 
 class Notafiscal(models.Model):
@@ -239,6 +250,9 @@ class Notafiscal(models.Model):
         managed = False
         db_table = 'notafiscal'
 
+    def __str__(self):
+        return self.num_nota
+
 
 class Processo(models.Model):
     codigo = models.AutoField(primary_key=True)
@@ -250,3 +264,20 @@ class Processo(models.Model):
     class Meta:
         managed = False
         db_table = 'processo'
+
+    def __str__(self):
+        return self.nome
+
+class Empenho(models.Model):
+    data_ne = models.CharField(max_length=20, blank=True, null=True)
+    nome = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'empenho'
+
+    def __str__(self):
+        return self.nome
+
+
+

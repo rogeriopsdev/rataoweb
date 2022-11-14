@@ -1,81 +1,66 @@
 {% extends 'ratao/base.html' %}
 
 {% block content %}
+    <form method="GET" class="input-group col-4 mb-5 container-sm">
+        <input class="form-control " type="search" placeholder="Busque aqui!" name="search"
+               value="{{ request.POST.search }}">
+        <button class="btn btn-primary ml-1">Pesquisar</button>
+    </form>
+
+    <div class="container text-capitalize text-justify">
 
 
+        <div class="container-sm" style="font-size: 0.7rem;">
 
-    <div class="table-responsive{-sm|-md|-lg|-xl|-xxl} h-75 w-50">
+            <table class="table table-responsive-sm table-condensed ">
+                <thead class="col-lg-4 text-sm-center thead-light font-weight-light">
+                <tr class=" ">
 
-        <table class="table table-sm  table-bordered ">
-            <thead class="col-lg-4 text-sm-center table-success ">
-            <tr class="w-50">
-                <td>ID</td>
-                <td>CODIGO</td>
-                <td>NOME</td>
-                <td>DESCRIÇÃO</td>
-                <td>TOMBAMENTO</td>
-                <td>UN</td>
-                <td>QUANTIDADE</td>
-                <td>ESTADO</td>
-                <td>COD_LOCAL</td>
-                <td>LOCAL</td>
-                <td>VALOR_UN</td>
-                <td>VALOR_TOTAL</td>
-                <td>FOTO</td>
-                <td>FORNECEDOR</td>
-                <td>NOTA_FISCAL</td>
-                <td>DATA_NF</td>
-                <td>NOTA_EMPENHO</td>
-                <td>DATA_NE</td>
-                <td>DATA_RECEBIMENTO</td>
-                <td>PROCESSO</td>
-                <td>TIPO_ENTRADA</td>
-                <td>RESPONSÁVEL</td>
-                <td>DATA_MANUTENÇÃO</td>
-                <td>ID_LOCAL</td>
-                <td>ID_FORNCEDOR</td>
-                <td>ID_MARCA</td>
-                <td>ID_CLASSIFICAÇÃO</td>
-                <td>ID_NOTA</td>
-                <td>ID_PROCESSO</td>
-            </tr>
-            </thead>
-            <tbody>
-            {% for material in m %}
-            <tr>
-                <td>{{ material.item }}</td>
-                <td>{{ material.codigo }}</td>
-                <td>{{ material.nome }}</td>
-                <td>{{ material.descricao }}</td>
-                <td>{{ material.tombamento }}</td>
-                <td>{{ material.uni }}</td>
-                <td>{{ material.quant }}</td>
-                <td>{{ material.estado }}</td>
-                <td>{{ material.codlocal }}</td>
-                <td>{{ material.local }}</td>
-                <td>{{ material.valor_unitario }}</td>
-                <td>{{ material.valor_total }}L</td>
-                <td><img src="{{ material.foto }}" alt=""></td>
-                <td>{{ material.forn }}</td>
-                <td>{{ material.nf }}</td>
-                <td>{{ material.data_nf }}</td>
-                <td>{{ material.ne }}</td>
-                <td>{{ material.data_ne }}</td>
-                <td>{{ material.datareceb }}</td>
-                <td>{{ material.processo }}</td>
-                <td>{{ material.tipoentrada }}</td>
-                <td>{{ material.responsavel }}L</td>
-                <td>{{ material.data_manute }}</td>
-                <td>{{ material.id_local }}</td>
-                <td>{{ material.id_fornecedor }}</td>
-                <td>{{ material.id_marca }}</td>
-                <td>I{{ material.id_classifica }}</td>
-                <td>{{ material.id_nota }}</td>
-                <td>{{ material.id_processo }}</td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+
+                    <td>DESCRIÇÃO</td>
+                    <td>TOMBAMENTO</td>
+                    <td>UN</td>
+                    <td>QUANTIDADE</td>
+                    <td>ESTADO</td>
+                    <td>LOCAL</td>
+                    <td>VALOR_UN</td>
+                    <td>VALOR_TOTAL</td>
+                    <td>RESPONSÁVEL</td>
+                    <td>AÇÕES</td>
+
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for material in m %}
+                    <tr>
+
+
+                        <td class="text-justify">{{ material.descricao }}</td>
+                        <td class="text-center">{{ material.tombamento }}</td>
+                        <td class="text-center">{{ material.uni }}</td>
+                        <td class="text-center">{{ material.quant }}</td>
+                        <td>{{ material.estado }}</td>
+                        <td>{{ material.local }}</td>
+                        <td class="text-center">{{ material.valor_unitario }}</td>
+                        <td class="text-center">{{ material.valor_total }}</td>
+                        <td class="text-justify">{{ material.responsavel }}</td>
+                        <td>
+
+                            <a href="{% url 'editar_material' material.item %}" class="btn p-0 bi bi-brush">  <i class='fas fa-edit' style='font-size:24px'> </i></a>
+
+
+                        </td>
+                        <td>
+
+                            <a href="{% url 'editar_material' material.item %}" class="btn p-0"><i class='far fa-file-alt' style='font-size:24px'></i></a>
+
+                        </td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
     </div>
-
 {% endblock content %}

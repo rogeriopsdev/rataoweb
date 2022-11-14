@@ -1,0 +1,56 @@
+{% extends 'ratao/base.html' %}
+
+{% block content %}
+    <form method="GET" class="input-group col-4 mb-5 container-sm">
+        <input class="form-control " type="search" placeholder="Busque aqui!" name="search"
+               value="{{ request.POST.search }}">
+        <button class="btn btn-primary ml-1">Pesquisar</button>
+    </form>
+
+    <div class="container text-capitalize text-justify">
+
+
+        <div class="col-7 container-sm" style="font-size: 0.7rem;">
+
+            <table class="table table-responsive-sm table-condensed ">
+                <thead class="col-lg-4 text-sm-center thead-light font-weight-light">
+                <tr class=" ">
+
+
+                    <td>CODIGO</td>
+                    <td>NOME</td>
+
+
+                    <td>AÇÕES</td>
+
+
+                </tr>
+                </thead>
+                <tbody>
+                {% for marca in marcas %}
+                    <tr>
+
+
+                        <td class="text-justify">{{ marca.codigo }}</td>
+                        <td class="text-center">{{ marca.nome }}</td>
+
+
+                        <td class="text-right p-1">
+
+                            <a href="{% url 'editar_marca' marca.codigo %}" class="btn p-0 bi bi-brush  ms-0 ml-0">  <i class='fas fa-edit' style='font-size:24px'> </i></a>
+
+
+                        </td>
+                        <td class="p-1">
+
+                            <a href="{% url 'editar_marca' marca.codigo %}" class="btn p-0 ms-0 ml-0"><i class='far fa-file-alt' style='font-size:24px'></i></a>
+
+                        </td>
+
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock content %}

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rataoapp',
     "crispy_forms",
     "crispy_bootstrap5",
+    'widget_tweaks',
 ]
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
@@ -130,9 +131,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL ='/img/'
 STATICFILES_DIRS =[
-    os.path.join(BASE_DIR,'static'),
+    os.path.join(BASE_DIR,'static')
 ]
-MEDIA_ROOT =    os.path.join(BASE_DIR, 'static/img')
+MEDIA_ROOT = os.path.join(BASE_DIR, '/static/img')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
